@@ -16,4 +16,5 @@
     height: 30px;
     border: 1px solid darkgrey;
     border-radius: 5px;
+    cursor: pointer;
 }
