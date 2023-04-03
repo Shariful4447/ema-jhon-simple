@@ -35,7 +35,7 @@ const Cart = (props) => {
     }
     return (
         <div>
-            <h3>Order Summery</h3>
+            <h3 className='text-danger'>Order Summery</h3>
             <h5>Items order: {cart.length}</h5>
             <p>Product Price: {formatNumber(total)}</p>
             <p>Shipping Cost: {shipping}</p>
