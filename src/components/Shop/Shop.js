@@ -13,15 +13,32 @@ const Shop = () => {
 
     const handleAddProduct = (product)=>{
         
-        const newCart=[...cart, product]
+        
+        const productTobeAddedkey = product.key;
+        const sameProduct =cart.find(pd =>pd.key === productTobeAddedkey);
+       
+        let newCart;
+        let count = 1;
+        if(sameProduct){
+            count= sameProduct.quantity+1;
+            sameProduct.quantity=count;
+            const others = cart.filter(pd => pd.key!== productTobeAddedkey);
+            newCart = [...others,sameProduct];
+
+        }
+
+        else{
+            product.quantity=1;
+            newCart = [...cart,product];
+        }
+        
         setCart(newCart);
-        const sameproduct =newCart.filter(pd =>pd.key === product.key);
-        const count = sameproduct.length;
+        
         addToDatabaseCart(product.key, count);
     }
     
     return (
-        <div className="shop-container">
+        <div className="twin-container">
             <div className="product-container">
                 
                 {
