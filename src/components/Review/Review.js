@@ -3,15 +3,29 @@ import fakeData from '../../fakeData';
 import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import { clearLocalShoppingCart } from '../../utilities/databaseManager';
+import happyImage from '../../images/giphy.gif';
 
 const Review = () => {
     const [cart, setCart] = useState([])
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    const handlePlaceOrder = ()=>{
+
+      setCart([]);
+      setOrderPlaced(true);
+      clearLocalShoppingCart();
+
+      console.log("order placed");
+    }
+    
     const removeProduct = (productKey)=> {
         console.log("product removed", productKey);
         const newCart = cart.filter(product => product.key!== productKey);
         setCart(newCart);
         removeFromDatabaseCart(productKey);
     }
+
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
@@ -23,6 +37,13 @@ const Review = () => {
         setCart(cartProducts);
     
     }, [])
+
+    let thankyou;
+    if(orderPlaced){
+      thankyou = <img src={happyImage} alt="" />
+    }
+     
+
     return (
         <div  className='twin-container'>
             
@@ -34,10 +55,15 @@ const Review = () => {
                  product= {pd}></ReviewItem>)
             }
 
+            {thankyou}
+              
+
           </div>
           <div className='cart-container'>
 
-            <Cart cart={cart}></Cart>
+            <Cart cart={cart}>
+               <button onClick={handlePlaceOrder} className='main-button'>Place Order </button>
+            </Cart>
           </div>
         </div>
     );

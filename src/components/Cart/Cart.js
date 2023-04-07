@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Cart = (props) => {
     const cart = props.cart;
     //By Reduce 
@@ -37,12 +38,16 @@ const Cart = (props) => {
     return (
         <div>
             <h3 className='text-danger'>Order Summery</h3>
-            <h5>Items order: {cart.length}</h5>
+            <h5>Items In Busket: {cart.length}</h5>
             <p>Product Price: {formatNumber(total)}</p>
             <p>Shipping Cost: {shipping}</p>
             <p>Vat + Tax: {tax}</p>
             <p>Total Price: {grandTotal}</p>
-            <a href="../Review/Review.js"><button>Review Order</button></a>
+            <br />
+            {
+                props.children
+            }
+            
         </div>
     );
 };
