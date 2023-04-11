@@ -14,6 +14,7 @@ import ProductDetail from './components/ProductDetail/ProductDetail';
 import LogIn from './components/Shipment/LogIn/LogIn';
 import Shipment from './components/Shipment/Shipment';
 import { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 export const UserContext =createContext();
@@ -29,7 +30,13 @@ function App() {
           <Route path="/review" element={<Review/>}></Route>
           <Route path="/Inventory" element={<Inventory/>}></Route>
           <Route path="/LogIn" element={<LogIn/>}></Route>
-          <Route path="/Shipment" element={<Shipment/>}></Route>
+          <Route path="/Shipment" element={
+            <PrivateRoute> 
+              <Shipment/> 
+            </PrivateRoute>
+            }>
+
+          </Route>
           <Route path="/product/:productKey" element={<ProductDetail/>}></Route>
           <Route path="*" element={<NotFound/>}></Route>
         </Routes>
