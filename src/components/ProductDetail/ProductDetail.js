@@ -10,7 +10,7 @@ const ProductDetail = () => {
     return (
         <div>
             <h1>{productKey} details Coming soon</h1>
-            <Product product={product}></Product>
+            <Product showAddToCart={false} product={product}></Product>
         </div>
     );
 };
