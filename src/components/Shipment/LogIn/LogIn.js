@@ -4,8 +4,9 @@ import 'firebase/compat/auth';
 //import firebaseConfig from './firebase.config';
 import { getAuth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
+import { UserContext } from '../../../App';
 //import { FacebookAuthProvider } from "firebase/auth";
 
 
@@ -28,8 +29,11 @@ function LogIn() {
     
     name: "",
     email: "",
-    photo:""
+    photo:"",
+
   })
+
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   const googleProvider = new GoogleAuthProvider(); 
   //const fbAuthProvider = new FacebookAuthProvider();
@@ -166,6 +170,7 @@ const handleSubmit = (e) => {
           newUserInfo.error = '';
           newUserInfo.success=true;
           setUser(newUserInfo);
+          setLoggedInUser(newUserInfo);
           console.log('Sign In Succesfully', res.user);
       })
       
