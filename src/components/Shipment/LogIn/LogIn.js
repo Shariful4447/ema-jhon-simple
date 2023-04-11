@@ -7,6 +7,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile} from "firebase/auth";
 import { UserContext } from '../../../App';
+import { useLocation, useNavigate } from 'react-router-dom';
 //import { FacebookAuthProvider } from "firebase/auth";
 
 
@@ -33,7 +34,11 @@ function LogIn() {
 
   })
 
+  //To navigate new page after login
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from :{pathname : "/"}};
 
   const googleProvider = new GoogleAuthProvider(); 
   //const fbAuthProvider = new FacebookAuthProvider();
@@ -171,6 +176,7 @@ const handleSubmit = (e) => {
           newUserInfo.success=true;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
+          navigate('/Shipment', {replace: true});
           console.log('Sign In Succesfully', res.user);
       })
       
