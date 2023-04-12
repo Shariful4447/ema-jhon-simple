@@ -1,10 +1,10 @@
 import React, { children, useContext } from 'react';
-import { Navigate,Routes} from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import { UserContext } from '../../App';
 
 
 
-const PrivateRoute = ({children,...rest}) => {
+const PrivateRoute = ({children, ...rest}) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     return (
         
