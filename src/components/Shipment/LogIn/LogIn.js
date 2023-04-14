@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth} from "firebase/auth";
 import { UserContext } from '../../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createUser, signInUser, handleFacebookSignIn, handleGoogleSignIn, handleSignout, initializeLogInFrameWork } from "./loginManager";
+import { createUser, signInUser, handleFacebookSignIn, handleGoogleSignIn, handleSignout, initializeLogInFrameWork, resetPassword } from "./loginManager";
 //import { FacebookAuthProvider } from "firebase/auth";
 
 
@@ -157,6 +157,7 @@ function LogIn()
     
     <input type="submit" value={newUser ? 'SignUp':'SignIn'} />
     </form>
+    <button onClick={()=>resetPassword(user.email)}>Forget or Reset Your Password </button>
       <p style={{color: 'red'}}>{user.error}</p>
       {user.success && <p style={{color: 'green'}}>User {newUser ? 'Created':'Logged In'} successfully</p>}
 
